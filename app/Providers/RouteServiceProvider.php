@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Pagination\Paginator;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -17,7 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
 
     /**
      * The controller namespace for the application.
@@ -33,8 +35,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    protected $namespace = 'App\\Http\\Controllers';
+
     public function boot()
     {
+        Paginator::useBootstrap();
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
