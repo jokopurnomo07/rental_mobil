@@ -11,8 +11,5 @@ class Cars extends Model
 
     use HasFactory;
 
-    public function merk()
-    {
-        return $this->belongsTo(Merk::class, 'merk_id', 'id');
-    }
+    protected $fillable = ['status_mobil'];
 }

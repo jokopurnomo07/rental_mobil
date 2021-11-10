@@ -21,15 +21,11 @@
                         @csrf
 
                         <div class="row">
+                            
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="merk">Merk Mobil</label>
-                                    <select class="form-select" id="merk" name="merk_mobil" required>
-                                        <option>-- Pilih Merk Mobil --</option>
-                                        @foreach ($data as $item)
-                                            <option value="{{ $item->id }}">{{ $item->merk }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" id="merk_mobil" class="form-control" placeholder="Masukkan Merk Mobil" name="merk_mobil" required>
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">

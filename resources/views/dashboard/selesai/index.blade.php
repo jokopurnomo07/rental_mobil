@@ -1,10 +1,10 @@
 @extends('layouts.dashboard')
-@section('title', 'User')
+@section('title', 'Pesanan')
 
 @section('content')
 
 <div class="page-heading">
-    <h3>User</h3>
+    <h3>Pesanan</h3>
 </div>
 <div class="page-content">
     <section class="row">
@@ -18,34 +18,32 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama User</th>
-                                    <th>Email</th>
-                                    <th>Alamat</th>
-                                    <th>No HP</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Kota</th>
-                                    <th>Jenis Kelamin</th>
+                                    <th>Merk Mobil</th>
+                                    <th>Nama Mobil</th>
+                                    <th>No Pesanan</th>
+                                    <th>Tanggal Sewa</th>
+                                    <th>Tanggal Selesai</th>
+                                    <th>Jaminan</th>
+                                    <th>Status Peminjaman</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($data as $key => $item)
                                 <tr>
                                     <td class="text-bold-500">{{ $key + 1 }}</td>
-                                    <td>{{ $item->nama_lengkap ? $item->nama_lengkap : '-' }}</td>
-                                    <td class="text-bold-500">{{ $item->email ? $item->email : '-' }}</td>
-                                    <td>{{ $item->alamat ? $item->alamat : '-' }}</td>
-                                    <td>{{ $item->no_telephone ? $item->no_telephone : '-' }}</td>
-                                    <td>{{ $item->tgl_lahir ? $item->tgl_lahir : '-' }}</td>
-                                    <td>{{ $item->pekerjaan ? $item->pekerjaan : '-' }}</td>
-                                    <td>{{ $item->kota ? $item->kota : '-' }}</td>
-                                    <td>{{ $item->jenis_kelamin ? $item->jenis_kelamin : '-' }}</td>
+                                    <td>{{ $item->cars->merk_mobil }}</td>
+                                    <td class="text-bold-500">{{ $item->cars->nama_mobil }}</td>
+                                    <td>{{ $item->no_pesanan }}</td>
+                                    <td>{{ $item->tgl_sewa }}</td>
+                                    <td>{{ $item->tgl_selesai }}</td>
+                                    <td>{{ $item->jaminan }}</td>
+                                    <td>{{ ( $item->status_peminjaman == 0 ) ? "Menunggu Dibayar" : (( $item->status_peminjaman == 1 )  ? "Sedang Proses Peminjaman" : "Selesai") }}</td>
                                 </tr>
 
                                 @empty
 
                                 <tr>
-                                    <td class="text-bold-500" colspan="9">Tidak Ada Data User</td>
+                                    <td class="text-bold-500" colspan="9">Tidak Ada Pesanan yang Terselesaikan</td>
                                 </tr>
 
                                 @endforelse

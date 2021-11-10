@@ -27,7 +27,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="{{ route('dashboard') }}">
+                            <a href="{{ route('cars.index') }}">
                                 Rental Mobil Bumiayu
                             </a>
                         </div>
@@ -36,35 +36,57 @@
                         </div>
                     </div>
                 </div>
+                
+                <div class="d-flex justify-content-center">
+                    <div class="avatar avatar-xl me-3">
+                        <img src="{{ asset('assets/images/faces/2.jpg') }}" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="javascript:void(0)">
+                        Profile
+                    </a>
+                </div>
+
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : ''}}">
+                        {{-- <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : ''}}">
                             <a href="{{ route('dashboard') }}" class='sidebar-link'>
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>Dashboard</span>
                             </a>
-                        </li>
-
-                        <li class="sidebar-item {{ request()->routeIs('merk.*') ? 'active' : ''}}">
-                            <a href="{{ route('merk.index') }}" class='sidebar-link'>
-                                <i class="fas fa-car"></i>
-                                <span>Merk</span>
-                            </a>
-                        </li>
+                        </li> --}}
 
                         <li class="sidebar-item {{ request()->routeIs('cars.*') ? 'active' : ''}}">
                             <a href="{{ route('cars.index') }}" class='sidebar-link'>
                                 <i class="fas fa-car"></i>
-                                <span>Mobil</span>
+                                <span>Daftar Mobil</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ request()->routeIs('pesanan.*') ? 'active' : ''}}">
-                            <a href="{{ route('pesanan.index') }}" class='sidebar-link'>
+                        @if( auth()->user()->role == 0 )
+                        <li class="sidebar-item {{ request()->routeIs('riwayat-pesanan.*') ? 'active' : ''}}">
+                            <a href="{{ route('riwayat-pesanan.index') }}" class='sidebar-link'>
                                 <i class="fas fa-hand-holding-usd"></i>
-                                <span>Pesanan</span>
+                                <span>Riwayat Pesanan</span>
+                            </a>
+                        </li>
+                        @endif
+
+                        @if ( auth()->user()->role == 1 )
+                        <li class="sidebar-item {{ request()->routeIs('booking.*') ? 'active' : ''}}">
+                            <a href="{{ route('booking.index') }}" class='sidebar-link'>
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>Booking</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item {{ request()->routeIs('proses-pinjam.*') ? 'active' : ''}}">
+                            <a href="{{ route('proses-pinjam.index') }}" class='sidebar-link'>
+                                <i class="fas fa-truck-moving"></i>
+                                <span>Proses Pinjam</span>
                             </a>
                         </li>
 
@@ -73,6 +95,25 @@
                                 <i class="fas fa-users"></i>
                                 <span>User</span>
                             </a>
+                        </li>
+
+                        <li class="sidebar-item {{ request()->routeIs('selesai.*') ? 'active' : ''}}">
+                            <a href="{{ route('selesai.index') }}" class='sidebar-link'>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Selesai</span>
+                            </a>
+                        </li>
+                        @endif
+
+                        <li class="sidebar-item">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class='sidebar-link'>
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Keluar</span>
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                         
                     </ul>

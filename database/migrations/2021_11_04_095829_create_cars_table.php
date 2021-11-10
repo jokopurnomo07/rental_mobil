@@ -15,14 +15,14 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('merk_id');
+            $table->string('merk_mobil')->nullable();
             $table->string('nama_mobil')->nullable();
             $table->string('no_polisi')->nullable();
             $table->string('gambar_mobil')->nullable();
             $table->string('harga_sewa')->nullable();
             $table->string('bahan_bakar')->nullable();
             $table->text('keterangan')->nullable();
-            $table->string('status_mobil')->nullable();
+            $table->string('status_mobil')->nullable()->default(0);
             $table->string('tahun_pembuatan')->nullable();
             $table->string('tenaga')->nullable();
             $table->string('warna_mobil')->nullable();

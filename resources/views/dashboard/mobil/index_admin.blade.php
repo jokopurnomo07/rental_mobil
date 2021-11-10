@@ -35,63 +35,73 @@
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="card">
+                @if ( auth()->user()->role == 1 )
                 <div class="card-header">
                     <a href="{{ route('cars.create') }}">
                         <button class="btn btn-primary rounded-pill">Tambah Mobil</button>
                     </a>
                 </div>
+                @endif
                 <div class="card-body">
-                    <!-- table bordered -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Gambar Mobil</th>
-                                    <th>Nama Mobil</th>
-                                    <th>Merk Mobil</th>
-                                    <th>No. Polisi</th>
-                                    <th>Fasilitas</th>
-                                    <th>Keterangan</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                @forelse ($cars as $key => $item)
-                                    
-                                <tr>
-                                    <td class="text-bold-500 text-center">{{ $key + 1 }}</td>
-                                    <td>
-                                        <img src="{{ asset('storage/gambar_mobil/'.$item->gambar_mobil.'') }}" alt="Gambar Mobil {{ $item->nama_mobil }}" width="150">
-                                    </td>
-                                    <td class="text-center">{{ $item->nama_mobil }}</td>
-                                    <td class="text-bold-500 text-center">{{ $item->merk->merk }}</td>
-                                    <td>{{ $item->no_polisi }}</td>
-                                    <td>{{ $item->fasilitas }}</td>
-                                    <td>{{ $item->keterangan }}</td>
-                                    <td>
-                                        <button class="btn btn-success rounded-pill btn_detail" data-detail="{{ $item->id }}">Detail</button>
+                    {{-- Start --}}
 
-                                        <a href="{{ route('cars.edit', $item->id) }}">
-                                            <button class="btn btn-primary rounded-pill">Edit</button>
-                                        </a>
-                                        
-                                        <button class="btn btn-danger rounded-pill btn_hapus" data-lok="{{ $item->id }}">Hapus</button>
-                                    </td>
-                                </tr>
+                    @forelse ($cars as $item)
+                        <div class="card mb-3 w-100">
+                            <div class="row no-gutters">
+                                <div class="col-md-3">
+                                    <img src="{{ asset('storage/gambar_mobil/'.$item->gambar_mobil.'') }}" alt="Gambar {{ $item->nama_mobil }}" width="250">
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ $item->nama_mobil }}</h5>
+                                        <p class="card-text">
+                                            Bahan Bakar : {{ $item->bahan_bakar }}
+                                        </p>
+                                        <p class="">
+                                            Biaya Sewa : {{ $item->harga_sewa }}
+                                        </p>
+                                        <p class="">
+                                            Deskripsi : 
+                                            <span>{{ $item->keterangan }}</span>
+                                        </p>
+                                        @if ( auth()->user()->role == 1 )
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            <a href="{{ route('cars.edit', $item->id) }}">
+                                                <button class="btn btn-primary rounded-pill" style="margin-right: 10px">Edit</button>
+                                            </a>
+                                            <button class="btn btn-danger btn_hapus rounded-pill" data-lok="{{ $item->id }}">Hapus</button>
+                                        </div>
+                                        @endif
 
-                                @empty
+                                        @if ( Auth::user()->role == 0 )
+                                        <div class="d-flex justify-content-end align-items-center">
+                                            @if ( $item->status_mobil == 0 )
+                                            <a href="{{ route('booking.pesan', $item->id) }}">
+                                                <button class="btn btn-primary rounded-pill" style="margin-right: 10px">Pesan</button>
+                                            </a>
+                                            @endif
 
-                                <tr>
-                                    Belum Ada Data
-                                </tr>
+                                            @if ( $item->status_mobil == 1 )
+                                            <button class="btn btn-danger rounded-pill" disabled style="margin-right: 10px">Sedang Dipinjam</button>
+                                            @endif
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                                @endforelse
+                    @empty
 
-                            </tbody>
-                        </table>
+                    <div class="card mb-3 w-100 d-flex justify-content-center align-items-center">
+                        <h4>Tidak Ada Data Mobil</h4>
                     </div>
+
+                    @endforelse
+
+                    {{ $cars->links() }}
+
+                    {{-- End --}}
                 </div>
             </div>
         </div>

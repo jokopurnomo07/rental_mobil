@@ -11,22 +11,20 @@ class CarsController extends Controller
 {
     public function index()
     {
-        $cars = Cars::with('merk')->paginate(10);
+        $cars = Cars::paginate(2);
 
         return view('dashboard.mobil.index_admin', compact('cars'));
     }
 
     public function create()
     {
-        $data = Merk::all();
-
-        return view('dashboard.mobil.tambah', compact('data'));
+        return view('dashboard.mobil.tambah');
     }
 
     public function store(Request $request)
     {
         $data = new Cars;
-        $data->merk_id = $request->merk_mobil;
+        $data->merk_mobil = $request->merk_mobil;
         $data->nama_mobil = $request->nama_mobil;
         $data->no_polisi = $request->no_polisi;
 
