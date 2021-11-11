@@ -26,11 +26,17 @@
                     </div>
                     <h1 class="auth-title">Log in.</h1>
 
+                    @error('email')
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
 
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" class="form-control form-control-xl" placeholder="Email" name="email">
+                            <input type="text" class="form-control form-control-xl" placeholder="Email" :value="old('email')" name="email">
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>
                             </div>

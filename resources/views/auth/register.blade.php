@@ -26,6 +26,19 @@
                     </div>
                     <h1 class="auth-title">Sign Up</h1>
 
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @error('email')
+                                    <li>Maaf email sudah digunakan</li>
+                                @enderror
+                                @error('name')
+                                    <li>Maaf username sudah digunakan</li>
+                                @enderror
+                            </ul>
+                        </div>
+                    @endif
+
                     <form action="{{ route('register') }}" method="POST">
                         @csrf
 
