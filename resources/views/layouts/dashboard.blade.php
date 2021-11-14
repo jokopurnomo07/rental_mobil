@@ -77,7 +77,7 @@
                         <li class="sidebar-item {{ request()->routeIs('booking.*') ? 'active' : ''}}">
                             <a href="{{ route('booking.index') }}" class='sidebar-link'>
                                 <i class="fas fa-hand-holding-usd"></i>
-                                <span>Booking</span>
+                                <span>Penyewaan</span>
                             </a>
                         </li>
 
