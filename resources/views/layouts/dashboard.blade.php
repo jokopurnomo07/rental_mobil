@@ -42,7 +42,7 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                     <a href="javascript:void(0)">
-                        Profile
+                        {{ auth()->user()->name }}
                     </a>
                 </div>
 

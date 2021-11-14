@@ -25,12 +25,7 @@
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
                                     <label for="merk">Merk Mobil</label>
-                                    <select class="form-select" id="merk" name="merk_mobil" required>
-                                        <option>-- Pilih Merk Mobil --</option>
-                                        @foreach ($merk as $item)
-                                            <option value="{{ $item->id }}" {{ $data->merk_id == $item->id ? 'selected' : '' }}>{{ $item->merk }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" id="merk_mobil" class="form-control" placeholder="Masukkan Merk Mobil" name="merk_mobil" required value="{{ $data->merk_mobil }}">
                                 </div>
                             </div>
                             <div class="col-md-6 col-12">
@@ -84,13 +79,6 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="gambar_mobil">Gambar Mobil</label>
-                                    <input class="form-control" type="file" id="gambar_mobil" name="gambar_mobil" value="{{ $data->gambar_mobil }}">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-12">
-                                <div class="form-group">
                                     <label for="fasilitas">Fasilitas Mobil</label>
                                     <textarea class="form-control" id="fasilitas" name="fasilitas" rows="3">{{ $data->fasilitas }}</textarea>
                                 </div>
@@ -101,6 +89,19 @@
                                     <textarea class="form-control" id="keterangan" name="keterangan" rows="3">{{ $data->keterangan }}</textarea>
                                 </div>
                             </div>
+
+                            <div class="col-md-6" id="previewMobil">
+                                Preview Gambar Mobil
+                                <img class="card-img-top img-fluid" id="previewGambar" src="{{ asset('storage/gambar_mobil/'. $data->gambar_mobil) }}" alt="Card image cap" style="height: 20rem" />
+                            </div>
+
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="gambar_mobil">Gambar Mobil</label>
+                                    <input class="form-control" type="file" id="gambar_mobil" name="gambar_mobil" onchange="img(this)">
+                                </div>
+                            </div>
+
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
@@ -116,3 +117,25 @@
 </div>
 
 @endsection
+
+@push('after-script')
+
+@if ( $data->gambar_mobil == null )
+
+<script>
+    $('#previewMobil').hide()
+</script>
+
+@endif
+
+<script>
+
+    // Preview Gambar Mobil
+    function img(input){
+        $('#previewGambar')[0].src = (window.URL ? URL : webkitURL).createObjectURL(input.files[0]);
+        $('#previewMobil').show()
+    }
+
+</script>
+
+@endpush

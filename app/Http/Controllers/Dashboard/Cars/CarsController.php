@@ -46,10 +46,9 @@ class CarsController extends Controller
 
     public function edit($id)
     {
-        $data = Cars::with('merk')->where('id', $id)->first();
-        $merk = Merk::all();
+        $data = Cars::where('id', $id)->first();
 
-        return view('dashboard.mobil.ubah', compact('data', 'merk'));
+        return view('dashboard.mobil.ubah', compact('data'));
     }
 
     public function update(Request $request, $id)

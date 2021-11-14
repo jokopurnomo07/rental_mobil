@@ -79,23 +79,29 @@
 
                             <div class="col-md-6 col-12">
                                 <div class="form-group">
-                                    <label for="gambar_mobil">Gambar Mobil</label>
-                                    <input class="form-control" type="file" id="gambar_mobil" name="gambar_mobil">
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 col-12">
-                                <div class="form-group">
                                     <label for="fasilitas">Fasilitas Mobil</label>
-                                    <textarea class="form-control" id="fasilitas" name="fasilitas" rows="3"></textarea>
+                                    <textarea class="form-control" id="fasilitas" name="fasilitas" rows="3" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 col-12">
                                 <div class="form-group">
                                     <label for="keterangan">Keterangan Mobil</label>
-                                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3"></textarea>
+                                    <textarea class="form-control" id="keterangan" name="keterangan" rows="3" required></textarea>
                                 </div>
                             </div>
+
+                            <div class="col-md-6" id="previewMobil">
+                                Preview Gambar Mobil
+                                <img class="card-img-top img-fluid" id="previewGambar" src="{{ asset('assets/images/samples/origami.jpg') }}" alt="Card image cap" style="height: 20rem" />
+                            </div>
+
+                            <div class="col-md-12 col-12">
+                                <div class="form-group">
+                                    <label for="gambar_mobil">Gambar Mobil</label>
+                                    <input class="form-control" type="file" id="gambar_mobil" name="gambar_mobil" onchange="img(this)">
+                                </div>
+                            </div>
+
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
@@ -111,3 +117,18 @@
 </div>
 
 @endsection
+
+@push('after-script')
+
+<script>
+    $('#previewMobil').hide()
+
+    // Preview Gambar Mobil
+    function img(input){
+        $('#previewGambar')[0].src = (window.URL ? URL : webkitURL).createObjectURL(input.files[0]);
+        $('#previewMobil').show()
+    }
+
+</script>
+
+@endpush

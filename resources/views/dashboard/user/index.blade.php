@@ -22,10 +22,6 @@
                                     <th>Email</th>
                                     <th>Alamat</th>
                                     <th>No HP</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Kota</th>
-                                    <th>Jenis Kelamin</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,10 +32,6 @@
                                     <td class="text-bold-500">{{ $item->email ? $item->email : '-' }}</td>
                                     <td>{{ $item->alamat ? $item->alamat : '-' }}</td>
                                     <td>{{ $item->no_telephone ? $item->no_telephone : '-' }}</td>
-                                    <td>{{ $item->tgl_lahir ? $item->tgl_lahir : '-' }}</td>
-                                    <td>{{ $item->pekerjaan ? $item->pekerjaan : '-' }}</td>
-                                    <td>{{ $item->kota ? $item->kota : '-' }}</td>
-                                    <td>{{ $item->jenis_kelamin ? $item->jenis_kelamin : '-' }}</td>
                                 </tr>
 
                                 @empty

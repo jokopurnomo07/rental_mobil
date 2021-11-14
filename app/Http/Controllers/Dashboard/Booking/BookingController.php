@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cars;
 use App\Models\Merk;
 use App\Models\Pesanan;
+use CreatePesananTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +24,12 @@ class BookingController extends Controller
     {
         $data = Cars::find($id);
         return view('dashboard.booking.pesan', compact('data'));
+    }
+
+    public function konfirmasi(Request $request)
+    {
+        $data = Pesanan::find($request->id)->update(['status_pembayaran' => 1, 'status_peminjaman' => 1]);
+        return redirect()->back()->with(['success', 'Berhasil Konfirmasi Pembayaran']);
     }
 
     public function create()
@@ -80,5 +87,4 @@ class BookingController extends Controller
             'message' => 'Berhasil Menghapus Data'
         ]);
     }
-
 }

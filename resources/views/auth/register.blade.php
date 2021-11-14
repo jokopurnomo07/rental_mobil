@@ -17,14 +17,14 @@
     <div id="auth">
 
         <div class="row h-100">
-            <div class="col-lg-5 col-12">
+            <div class="col-lg-6 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
                         <a href="/">
                             <h3>Rental Mobil Bumiayu</h3>
                         </a>
                     </div>
-                    <h1 class="auth-title">Sign Up</h1>
+                    <h1 class="auth-title">Daftar</h1>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -55,6 +55,24 @@
                             </div>
                         </div>
                         <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="text" class="form-control form-control-xl" placeholder="Nama Lengkap" name="nama_lengkap">
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <input type="number" class="form-control form-control-xl" placeholder="No Handphone" name="no_hp">
+                            <div class="form-control-icon">
+                                <i class="bi bi-phone"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
+                            <textarea class="form-control" name="alamat" id="alamat" cols="50" rows="2" placeholder="Alamat"></textarea>
+                            <div class="form-control-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-4">
                             <input type="password" class="form-control form-control-xl" placeholder="Password" name="password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
@@ -70,13 +88,13 @@
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
                         <p class='text-gray-600'>
-                            Already have an account? 
-                            <a href="{{ route('login') }}" class="font-bold">Log in</a>.
+                            Sudah Memiliki Akun?
+                            <a href="{{ route('login') }}" class="font-bold">Masuk</a>.
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 d-none d-lg-block">
+            <div class="col-lg-6 d-none d-lg-block">
                 <div id="auth-right">
 
                 </div>
